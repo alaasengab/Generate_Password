@@ -1,7 +1,10 @@
 from tkinter import * 
 from tkinter import messagebox
 
-
+#---------------Generate Passowrd Description -----------------
+"""This Python application generates strong, 
+random passwords based on user-specified criteria. 
+Users can enter their email address to receive the generated password."""
 #---------------Save Password ----------------------------------
 
 def delete(entry):
