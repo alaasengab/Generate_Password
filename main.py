@@ -1,10 +1,50 @@
 from tkinter import * 
 from tkinter import messagebox
-
+from random import randint, choice, shuffle
+# import pyperclip optional if you want the password to be copied automatically 
 #---------------Generate Passowrd Description -----------------
 """This Python application generates strong, 
 random passwords based on user-specified criteria. 
 Users can enter their email address to receive the generated password."""
+
+
+#---------------Functions-----------------------------------
+
+#---------------Generate Password----------------------------
+
+def generate_password():
+    
+    #initiating variables 
+    letters = list(map(chr,range(97,123))) 
+    numbers =[]
+    for i in range(11):
+        numbers.append(str(i))
+    symbols = ['!', '@', '#', '$', "%", "^", "&", '*', '(', ')', "+","-" ,"="]
+
+    num_letters = randint(8,10)#int(input("how many numbers of letters"))
+    num_symbols=  randint(2,4)#int(input("how many numbers of sybmols"))
+    num_numbers = randint(2,4) #int(input("how many numbers of numbers"))
+
+
+    #using comprehension instead of for loop because it is shorter and more readable 
+    password_letters= [choice(letters) for _ in range(num_letters) ]
+    password_symbols= [choice(symbols) for _ in range(num_symbols)]
+    password_numbers=[choice(numbers) for _ in range (num_numbers)]
+
+    password_list= password_letters + password_symbols + password_numbers
+    #shuffle password from random 
+    shuffle(password_list)
+
+    #display password as a string 
+    # password=""
+    # for char in password_list:
+    #     password += char
+    password="".join(password_list)
+    password_entry.insert(END,password)
+    
+    #print(password)
+
+
 #---------------Save Password ----------------------------------
 
 def delete(entry):
@@ -61,7 +101,7 @@ password_entry= Entry(width=20, highlightbackground="white")
 password_entry.grid(row=3,column=1)
 
 #Buttons 
-generate_button = Button(text="Generate Password",highlightbackground="white")
+generate_button = Button(text="Generate Password",highlightbackground="white",command=generate_password)
 generate_button.grid(row=3, column=2)
 add_button = Button(text="Add", highlightbackground="white", width=35, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
